@@ -1,6 +1,0 @@
-spring:
-  application:
-    name: anan-admin
-  profiles:
-    # maven package -P xxx 打包命令的 profile 注入
-    active: '@profiles.active@'

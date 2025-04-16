@@ -23,4 +23,9 @@
 hs_err_pid*
 replay_pid*
 
+# git rm -r --cached target
+# git rm -r --cached .idea
 .idea
+target/
+.svn/
+
