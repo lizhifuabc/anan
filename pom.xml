@@ -1,0 +1,115 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+		 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<groupId>io.github.lizhifuabc</groupId>
+		<artifactId>anan-bom</artifactId>
+		<version>0.0.1-SNAPSHOT</version>
+		<relativePath>anan-bom/pom.xml</relativePath>
+	</parent>
+
+	<artifactId>anan</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<packaging>pom</packaging>
+
+	<name>anan</name>
+	<description>平安喜乐</description>
+	<url>https://github.com/lizhifuabc/anan</url>
+
+	<!-- 开源协议 -->
+	<licenses>
+		<license>
+			<name>MIT License</name>
+			<url>https://opensource.org/licenses/MIT</url>
+		</license>
+	</licenses>
+
+	<!-- 开发者信息 -->
+	<developers>
+		<developer>
+			<name>lizhifu</name>
+			<email>lizhifuabc@163.com</email>
+			<url>https://github.com/lizhifuabc</url>
+		</developer>
+	</developers>
+	<modules>
+		<module>anan-core</module>
+		<module>anan-bom</module>
+        <module>anan-admin</module>
+    </modules>
+
+	<!-- SCM 信息 -->
+	<scm>
+		<url>https://github.com/lizhifuabc/anan</url>
+		<connection>scm:git:git://github.com/lizhifuabc/anan.git</connection>
+		<developerConnection>scm:git:ssh://github.com/lizhifuabc/anan.git</developerConnection>
+	</scm>
+
+	<profiles>
+		<!--开发环境,即 默认环境-->
+		<profile>
+			<id>dev</id>
+			<properties>
+				<profiles.active>dev</profiles.active>
+			</properties>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+		</profile>
+		<!--测试环境-->
+		<profile>
+			<id>test</id>
+			<properties>
+				<profiles.active>test</profiles.active>
+			</properties>
+		</profile>
+		<!--生产环境-->
+		<profile>
+			<id>prod</id>
+			<properties>
+				<profiles.active>prod</profiles.active>
+			</properties>
+		</profile>
+	</profiles>
+
+	<build>
+		<finalName>${profiles.active}-${project.name}</finalName>
+		<resources>
+			<resource>
+				<filtering>false</filtering>
+				<directory>src/main/resources</directory>
+				<excludes>
+					<exclude>dev/*</exclude>
+					<exclude>test/*</exclude>
+					<exclude>pre/*</exclude>
+					<exclude>prod/*</exclude>
+				</excludes>
+			</resource>
+
+			<resource>
+				<directory>src/main/resources/${profiles.active}</directory>
+				<filtering>true</filtering>
+				<includes>
+					<include>*.yaml</include>
+				</includes>
+			</resource>
+
+			<resource>
+				<directory>src/main/resources/${profiles.active}</directory>
+				<filtering>false</filtering>
+				<includes>
+					<include>*.*</include>
+				</includes>
+			</resource>
+		</resources>
+		<plugins>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+		</plugins>
+	</build>
+
+</project>
