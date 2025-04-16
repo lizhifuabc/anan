@@ -21,5 +21,11 @@
             <groupId>io.github.lizhifuabc</groupId>
             <artifactId>anan-core-common</artifactId>
         </dependency>
+
+        <!-- Spring 自动配置处理器 -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-configuration-processor</artifactId>
+        </dependency>
     </dependencies>
 </project>
