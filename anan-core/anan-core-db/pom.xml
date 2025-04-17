@@ -13,6 +13,7 @@
     <packaging>pom</packaging>
     <modules>
         <module>db-sdk-mybatis-x</module>
+        <module>db-sdk-dynamic-datasource</module>
         <module>db-spring-boot-starter</module>
         <module>db-sdk-mybatis</module>
     </modules>
