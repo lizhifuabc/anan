@@ -5,19 +5,14 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>io.github.lizhifuabc</groupId>
-        <artifactId>anan</artifactId>
+        <artifactId>anan-core</artifactId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
 
-    <artifactId>anan-core</artifactId>
-    <packaging>pom</packaging>
-    <modules>
-        <module>anan-core-common</module>
-        <module>anan-core-cache</module>
-        <module>anan-core-db</module>
-        <module>anan-core-spring</module>
-        <module>anan-core-excel</module>
-        <module>anan-core-driver</module>
-    </modules>
+    <artifactId>anan-core-driver</artifactId>
+
+    <dependencies>
+
+    </dependencies>
 
 </project>
