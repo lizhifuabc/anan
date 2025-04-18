@@ -7,23 +7,6 @@ SET NAMES utf8mb4;
 SET FOREIGN_KEY_CHECKS = 0;
 
 -- ----------------------------
--- Table structure for t_config
--- ----------------------------
-DROP TABLE IF EXISTS `t_config`;
-CREATE TABLE `t_config`
-(
-    `config_id`    bigint       NOT NULL AUTO_INCREMENT COMMENT '主键',
-    `config_name`  varchar(255) NOT NULL COMMENT '参数名字',
-    `config_key`   varchar(255) NOT NULL COMMENT '参数key',
-    `config_value` text         NOT NULL,
-    `remark`       varchar(255)          DEFAULT NULL,
-    `create_time`  datetime     NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
-    `update_time`  datetime     NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
-    PRIMARY KEY (`config_id`),
-    UNIQUE index `uk_config_key` (`config_key`) COMMENT '配置键唯一索引'
-) COMMENT = '系统配置';
-
--- ----------------------------
 -- Table structure for t_department
 -- ----------------------------
 DROP TABLE IF EXISTS `t_department`;
