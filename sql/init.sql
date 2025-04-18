@@ -21,7 +21,7 @@ CREATE TABLE `t_config`
     `update_time`  datetime     NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
     PRIMARY KEY (`config_id`),
     UNIQUE KEY `uk_config_key` (`config_key`) COMMENT '配置键唯一索引'
-) ENGINE=InnoDB COMMENT = '系统配置';
+) COMMENT = '系统配置';
 
 -- ----------------------------
 -- Table structure for t_department
@@ -31,7 +31,7 @@ CREATE TABLE `t_department`
 (
     `department_id` bigint      NOT NULL AUTO_INCREMENT COMMENT '部门主键id',
     `name`          varchar(50) NOT NULL COMMENT '部门名称',
-    `user_id`    bigint      NULL     DEFAULT NULL COMMENT '部门负责人id',
+    `user_id`       bigint      NULL     DEFAULT NULL COMMENT '部门负责人id',
     `parent_id`     bigint      NOT NULL DEFAULT 0 COMMENT '部门的父级id',
     `sort`          int         NOT NULL COMMENT '部门排序',
     `status`        tinyint     NOT NULL DEFAULT 0 COMMENT '部门状态（0正常 1停用）',
@@ -41,7 +41,7 @@ CREATE TABLE `t_department`
     PRIMARY KEY (`department_id`),
     INDEX `idx_parent_id` (`parent_id`),
     INDEX `idx_manager_id` (`user_id`)
-) ENGINE=InnoDB COMMENT = '部门';
+) COMMENT = '部门';
 
 -- ----------------------------
 -- Table structure for t_dict
@@ -58,7 +58,7 @@ CREATE TABLE `t_dict`
     `update_time`   datetime     NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
     PRIMARY KEY (`dict_id`),
     UNIQUE KEY `uk_dict_code` (`dict_code`)
-) ENGINE=InnoDB COMMENT ='字典表';
+) COMMENT ='字典表';
 
 -- ----------------------------
 -- Table structure for t_dict_data
@@ -256,7 +256,7 @@ CREATE TABLE `t_login_log`
     PRIMARY KEY (`login_log_id`),
     KEY `idx_user_id` (`user_id`),
     KEY `idx_login_time` (`create_time`)
-) ENGINE=InnoDB COMMENT ='用户登录日志';
+) COMMENT ='用户登录日志';
 
 -- ----------------------------
 -- Table structure for t_mail_template
