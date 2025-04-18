@@ -1,6 +1,6 @@
 -- 导出 anan 的数据库结构
 DROP DATABASE IF EXISTS `anan`;
-CREATE DATABASE IF NOT EXISTS `anan`;
+CREATE DATABASE IF NOT EXISTS `anan` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
 USE `anan`;
 
 SET NAMES utf8mb4;
@@ -19,8 +19,9 @@ CREATE TABLE `t_config`
     `remark`       varchar(255) NULL     DEFAULT NULL,
     `create_time`  datetime     NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
     `update_time`  datetime     NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
-    PRIMARY KEY (`config_id`)
-) COMMENT = '系统配置';
+    PRIMARY KEY (`config_id`),
+    UNIQUE KEY `uk_config_key` (`config_key`) COMMENT '配置键唯一索引'
+) ENGINE=InnoDB COMMENT = '系统配置';
 
 -- ----------------------------
 -- Table structure for t_department
@@ -30,14 +31,17 @@ CREATE TABLE `t_department`
 (
     `department_id` bigint      NOT NULL AUTO_INCREMENT COMMENT '部门主键id',
     `name`          varchar(50) NOT NULL COMMENT '部门名称',
-    `manager_id`    bigint      NULL     DEFAULT NULL COMMENT '部门负责人id',
+    `user_id`    bigint      NULL     DEFAULT NULL COMMENT '部门负责人id',
     `parent_id`     bigint      NOT NULL DEFAULT 0 COMMENT '部门的父级id',
     `sort`          int         NOT NULL COMMENT '部门排序',
+    `status`        tinyint     NOT NULL DEFAULT 0 COMMENT '部门状态（0正常 1停用）',
+    `deleted_flag`  tinyint     NOT NULL DEFAULT 0 COMMENT '删除标志（0存在 1删除）',
     `create_time`   datetime    NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
     `update_time`   datetime    NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
     PRIMARY KEY (`department_id`),
-    INDEX `parent_id` (`parent_id`)
-) COMMENT = '部门';
+    INDEX `idx_parent_id` (`parent_id`),
+    INDEX `idx_manager_id` (`user_id`)
+) ENGINE=InnoDB COMMENT = '部门';
 
 -- ----------------------------
 -- Table structure for t_dict
@@ -53,8 +57,8 @@ CREATE TABLE `t_dict`
     `create_time`   datetime     NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
     `update_time`   datetime     NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
     PRIMARY KEY (`dict_id`),
-    UNIQUE KEY `unique_code` (`dict_code`)
-) COMMENT ='字典表';
+    UNIQUE KEY `uk_dict_code` (`dict_code`)
+) ENGINE=InnoDB COMMENT ='字典表';
 
 -- ----------------------------
 -- Table structure for t_dict_data
@@ -250,8 +254,9 @@ CREATE TABLE `t_login_log`
     `create_time`     datetime      NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
     `update_time`     datetime      NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
     PRIMARY KEY (`login_log_id`),
-    KEY `customer_id` (`user_id`)
-) COMMENT ='用户登录日志';
+    KEY `idx_user_id` (`user_id`),
+    KEY `idx_login_time` (`create_time`)
+) ENGINE=InnoDB COMMENT ='用户登录日志';
 
 -- ----------------------------
 -- Table structure for t_mail_template
