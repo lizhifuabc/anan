@@ -33,7 +33,7 @@ CREATE TABLE `t_department`
     `name`          varchar(50) NOT NULL COMMENT '部门名称',
     `user_id`       bigint               DEFAULT NULL COMMENT '部门负责人id',
     `parent_id`     bigint      NOT NULL DEFAULT 0 COMMENT '部门的父级id',
-    `sort`          int         NOT NULL COMMENT '部门排序',
+    `sort`          int         NOT NULL DEFAULT 0 COMMENT '排序',
     `status`        tinyint     NOT NULL DEFAULT 0 COMMENT '部门状态（0正常 1停用）',
     `deleted_flag`  tinyint     NOT NULL DEFAULT 0 COMMENT '删除标志（0存在 1删除）',
     `deleted_time`  datetime             default NULL COMMENT '删除时间',
@@ -72,7 +72,7 @@ CREATE TABLE `t_dict_data`
     `data_value`    varchar(500) NOT NULL COMMENT '字典项值',
     `data_label`    varchar(500) NOT NULL COMMENT '字典项显示名称',
     `remark`        varchar(1000)         DEFAULT NULL COMMENT '备注',
-    `sort_order`    int          NOT NULL COMMENT '排序（越大越靠前）',
+    `sort`          int          NOT NULL DEFAULT 0 COMMENT '排序',
     `disabled_flag` tinyint      NOT NULL DEFAULT 0 COMMENT '禁用状态',
     `create_time`   datetime     NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
     `update_time`   datetime     NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
@@ -96,7 +96,7 @@ CREATE TABLE `t_user`
     `position_id`        bigint                    DEFAULT NULL COMMENT '职务ID',
     `email`              varchar(100)              DEFAULT NULL COMMENT '邮箱',
     `disabled_flag`      tinyint unsigned NOT NULL COMMENT '是否被禁用 0否1是',
-    `deleted_flag`       tinyint unsigned NOT NULL COMMENT '是否删除0否 1是',
+    `deleted_flag`       tinyint          NOT NULL DEFAULT 0 COMMENT '删除标志（0存在 1删除）',
     `deleted_time`       datetime                  default NULL COMMENT '删除时间',
     `administrator_flag` tinyint          NOT NULL DEFAULT 0 COMMENT '是否为超级管理员: 0 不是，1是',
     `remark`             varchar(200)              DEFAULT NULL COMMENT '备注',
@@ -145,79 +145,6 @@ CREATE TABLE `t_file`
     INDEX `module_type` (`folder_type`)
 ) COMMENT = '文件';
 
-
--- ----------------------------
--- Table structure for t_help_doc
--- ----------------------------
-DROP TABLE IF EXISTS `t_help_doc`;
-CREATE TABLE `t_help_doc`
-(
-    `help_doc_id`         bigint       NOT NULL AUTO_INCREMENT,
-    `help_doc_catalog_id` bigint       NOT NULL COMMENT '类型1公告 2动态',
-    `title`               varchar(200) NOT NULL COMMENT '标题',
-    `content_text`        text         NOT NULL COMMENT '文本内容',
-    `content_html`        text         NOT NULL COMMENT 'html内容',
-    `attachment`          varchar(1000)         DEFAULT NULL COMMENT '附件',
-    `sort`                int          NOT NULL DEFAULT 0 COMMENT '排序',
-    `page_view_count`     int          NOT NULL DEFAULT 0 COMMENT '页面浏览量，传说中的pv',
-    `user_view_count`     int          NOT NULL DEFAULT 0 COMMENT '用户浏览量，传说中的uv',
-    `author`              varchar(1000)         DEFAULT NULL COMMENT '作者',
-    `create_time`         datetime     NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
-    `update_time`         datetime     NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
-    PRIMARY KEY (`help_doc_id`)
-) COMMENT = '帮助文档';
-
-
--- ----------------------------
--- Table structure for t_help_doc_catalog
--- ----------------------------
-DROP TABLE IF EXISTS `t_help_doc_catalog`;
-CREATE TABLE `t_help_doc_catalog`
-(
-    `help_doc_catalog_id` bigint        NOT NULL AUTO_INCREMENT COMMENT '帮助文档目录',
-    `name`                varchar(1000) NOT NULL COMMENT '名称',
-    `sort`                int           NOT NULL DEFAULT 0 COMMENT '排序字段',
-    `parent_id`           bigint        NOT NULL COMMENT '父级id',
-    `create_time`         datetime      NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
-    `update_time`         datetime      NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
-    PRIMARY KEY (`help_doc_catalog_id`)
-) COMMENT = '帮助文档-目录';
-
--- ----------------------------
--- Table structure for t_help_doc_relation
--- ----------------------------
-DROP TABLE IF EXISTS `t_help_doc_relation`;
-CREATE TABLE `t_help_doc_relation`
-(
-    `relation_id`   bigint   NOT NULL COMMENT '关联id',
-    `relation_name` varchar(255)      DEFAULT NULL COMMENT '关联名称',
-    `help_doc_id`   bigint   NOT NULL COMMENT '文档id',
-    `create_time`   datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
-    `update_time`   datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
-    PRIMARY KEY (`relation_id`, `help_doc_id`),
-    UNIQUE INDEX `uni_menu_help_doc` (`relation_id`, `help_doc_id`)
-) COMMENT = '帮助文档-关联表';
-
--- ----------------------------
--- Table structure for t_help_doc_view_record
--- ----------------------------
-DROP TABLE IF EXISTS `t_help_doc_view_record`;
-CREATE TABLE `t_help_doc_view_record`
-(
-    `help_doc_id`      bigint   NOT NULL COMMENT '通知公告id',
-    `user_id`          bigint   NOT NULL COMMENT '用户id',
-    `user_name`        varchar(255)      DEFAULT NULL COMMENT '用户名称',
-    `page_view_count`  int      NULL     DEFAULT 0 COMMENT '查看次数',
-    `first_ip`         varchar(255)      DEFAULT NULL COMMENT '首次ip',
-    `first_user_agent` varchar(1000)     DEFAULT NULL COMMENT '首次用户设备等标识',
-    `last_ip`          varchar(255)      DEFAULT NULL COMMENT '最后一次ip',
-    `last_user_agent`  varchar(1000)     DEFAULT NULL COMMENT '最后一次用户设备等标识',
-    `create_time`      datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
-    `update_time`      datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
-    PRIMARY KEY (`help_doc_id`, `user_id`),
-    UNIQUE INDEX `uk_notice_user` (`help_doc_id`, `user_id`) COMMENT '资讯用户'
-) COMMENT = '帮助文档-查看记录';
-
 -- ----------------------------
 -- Table structure for t_login_fail
 -- ----------------------------
@@ -261,23 +188,6 @@ CREATE TABLE `t_login_log`
 ) COMMENT ='用户登录日志';
 
 -- ----------------------------
--- Table structure for t_mail_template
--- ----------------------------
-DROP TABLE IF EXISTS `t_mail_template`;
-CREATE TABLE `t_mail_template`
-(
-    `template_code`    varchar(200) NOT NULL,
-    `template_subject` varchar(100) NOT NULL COMMENT '模板名称',
-    `template_content` longtext     NOT NULL COMMENT '模板内容',
-    `template_type`    varchar(50)  NOT NULL COMMENT '解析类型 string，freemarker',
-    `disable_flag`     tinyint      NOT NULL DEFAULT 0 COMMENT '是否禁用',
-    `create_time`      datetime     NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
-    `update_time`      datetime     NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
-    PRIMARY KEY (`template_code`),
-    UNIQUE INDEX `template_code` (`template_code`)
-) comment ='邮件模板';
-
--- ----------------------------
 -- Table structure for t_menu
 -- ----------------------------
 DROP TABLE IF EXISTS `t_menu`;
@@ -287,7 +197,7 @@ CREATE TABLE `t_menu`
     `menu_name`       varchar(200) NOT NULL COMMENT '菜单名称',
     `menu_type`       int          NOT NULL COMMENT '类型',
     `parent_id`       bigint       NOT NULL COMMENT '父菜单ID',
-    `sort`            int                   DEFAULT NULL COMMENT '显示顺序',
+    `sort`            int          NOT NULL DEFAULT 0 COMMENT '排序',
     `path`            varchar(255)          DEFAULT NULL COMMENT '路由地址',
     `component`       varchar(255)          DEFAULT NULL COMMENT '组件路径',
     `perms_type`      int                   DEFAULT NULL COMMENT '权限类型',
@@ -300,7 +210,7 @@ CREATE TABLE `t_menu`
     `cache_flag`      tinyint      NOT NULL DEFAULT 0 COMMENT '是否缓存',
     `visible_flag`    tinyint      NOT NULL DEFAULT 1 COMMENT '显示状态',
     `disabled_flag`   tinyint      NOT NULL DEFAULT 0 COMMENT '禁用状态',
-    `deleted_flag`    tinyint      NOT NULL DEFAULT 0 COMMENT '删除状态',
+    `deleted_flag`    tinyint      NOT NULL DEFAULT 0 COMMENT '删除标志（0存在 1删除）',
     `deleted_time`    datetime              default NULL COMMENT '删除时间',
     `create_user_id`  bigint       NOT NULL COMMENT '创建人',
     `create_time`     datetime     NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
@@ -350,7 +260,7 @@ CREATE TABLE `t_notice`
     `source`                 varchar(1000)         DEFAULT NULL COMMENT '来源',
     `author`                 varchar(1000)         DEFAULT NULL COMMENT '作者',
     `document_number`        varchar(1000)         DEFAULT NULL COMMENT '文号，如：〔2022〕字第36号',
-    `deleted_flag`           tinyint      NOT NULL DEFAULT 0,
+    `deleted_flag`           tinyint      NOT NULL DEFAULT 0 COMMENT '删除标志（0存在 1删除）',
     `deleted_time`           datetime              default NULL COMMENT '删除时间',
     `create_user_id`         bigint                DEFAULT NULL COMMENT '创建人',
     `create_time`            datetime     NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
@@ -441,9 +351,9 @@ CREATE TABLE `t_position`
     `position_id`   bigint       NOT NULL AUTO_INCREMENT COMMENT '职务ID',
     `position_name` varchar(200) NOT NULL COMMENT '职务名称',
     `level`         varchar(200)          DEFAULT NULL COMMENT '职级',
-    `sort`          int          NULL     DEFAULT 0 COMMENT '排序',
+    `sort`          int          NOT NULL DEFAULT 0 COMMENT '排序',
     `remark`        varchar(200)          DEFAULT NULL COMMENT '备注',
-    `deleted_flag`  tinyint      NULL     DEFAULT 0,
+    `deleted_flag`  tinyint      NOT NULL DEFAULT 0 COMMENT '删除标志（0存在 1删除）',
     `deleted_time`  datetime              default NULL COMMENT '删除时间',
     `create_time`   datetime     NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
     `update_time`   datetime     NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
