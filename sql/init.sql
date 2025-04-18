@@ -20,7 +20,7 @@ CREATE TABLE `t_config`
     `create_time`  datetime     NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
     `update_time`  datetime     NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
     PRIMARY KEY (`config_id`),
-    UNIQUE KEY `uk_config_key` (`config_key`) COMMENT '配置键唯一索引'
+    UNIQUE index `uk_config_key` (`config_key`) COMMENT '配置键唯一索引'
 ) COMMENT = '系统配置';
 
 -- ----------------------------
@@ -342,7 +342,7 @@ CREATE TABLE `t_position`
     `create_time`   datetime     NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
     `update_time`   datetime     NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
     PRIMARY KEY (`position_id`)
-) COMMENT = '职务表';
+) COMMENT = '职位表';
 
 -- ----------------------------
 -- Table structure for t_role
@@ -370,10 +370,9 @@ CREATE TABLE `t_role_user`
     `role_id`     bigint   NOT NULL COMMENT '角色id',
     `user_id`     bigint   NOT NULL COMMENT '用户id',
     `create_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
-    `update_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
     PRIMARY KEY (`id`),
     UNIQUE INDEX `uk_role_user` (`role_id`, `user_id`)
-) COMMENT = '角色用户功能表';
+) COMMENT = '角色-用户';
 
 -- ----------------------------
 -- Table structure for t_role_menu
@@ -385,7 +384,6 @@ CREATE TABLE `t_role_menu`
     `role_id`      bigint   NOT NULL COMMENT '角色id',
     `menu_id`      bigint   NOT NULL COMMENT '菜单id',
     `create_time`  datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
-    `update_time`  datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
     PRIMARY KEY (`role_menu_id`),
     INDEX `idx_role_id` (`role_id`),
     INDEX `idx_menu_id` (`menu_id`)
