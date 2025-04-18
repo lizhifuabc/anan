@@ -54,7 +54,7 @@ CREATE TABLE `t_dict`
     `dict_name`     varchar(500) NOT NULL COMMENT '字典名字',
     `dict_code`     varchar(500) NOT NULL COMMENT '字典编码',
     `remark`        varchar(1000)         DEFAULT NULL COMMENT '字典备注',
-    `disabled_flag` tinyint      NOT NULL DEFAULT '0' COMMENT '禁用状态',
+    `disabled_flag` tinyint      NOT NULL DEFAULT 0 COMMENT '禁用状态',
     `create_time`   datetime     NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
     `update_time`   datetime     NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
     PRIMARY KEY (`dict_id`),
@@ -73,7 +73,7 @@ CREATE TABLE `t_dict_data`
     `data_label`    varchar(500) NOT NULL COMMENT '字典项显示名称',
     `remark`        varchar(1000)         DEFAULT NULL COMMENT '备注',
     `sort_order`    int          NOT NULL COMMENT '排序（越大越靠前）',
-    `disabled_flag` tinyint      NOT NULL DEFAULT '0' COMMENT '禁用状态',
+    `disabled_flag` tinyint      NOT NULL DEFAULT 0 COMMENT '禁用状态',
     `create_time`   datetime     NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
     `update_time`   datetime     NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
     PRIMARY KEY (`dict_data_id`)
