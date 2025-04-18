@@ -36,11 +36,12 @@ CREATE TABLE `t_department`
     `sort`          int         NOT NULL COMMENT '部门排序',
     `status`        tinyint     NOT NULL DEFAULT 0 COMMENT '部门状态（0正常 1停用）',
     `deleted_flag`  tinyint     NOT NULL DEFAULT 0 COMMENT '删除标志（0存在 1删除）',
+    `deleted_time`  datetime             default NULL COMMENT '删除时间',
     `create_time`   datetime    NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
     `update_time`   datetime    NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
     PRIMARY KEY (`department_id`),
     INDEX `idx_parent_id` (`parent_id`),
-    INDEX `idx_manager_id` (`user_id`)
+    INDEX `idx_user_id` (`user_id`)
 ) COMMENT = '部门';
 
 -- ----------------------------
@@ -96,6 +97,7 @@ CREATE TABLE `t_user`
     `email`              varchar(100)     NULL     DEFAULT NULL COMMENT '邮箱',
     `disabled_flag`      tinyint unsigned NOT NULL COMMENT '是否被禁用 0否1是',
     `deleted_flag`       tinyint unsigned NOT NULL COMMENT '是否删除0否 1是',
+    `deleted_time`       datetime                  default NULL COMMENT '删除时间',
     `administrator_flag` tinyint          NOT NULL DEFAULT 0 COMMENT '是否为超级管理员: 0 不是，1是',
     `remark`             varchar(200)     NULL     DEFAULT NULL COMMENT '备注',
     `create_time`        datetime         NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
@@ -299,6 +301,7 @@ CREATE TABLE `t_menu`
     `visible_flag`    tinyint      NOT NULL DEFAULT 1 COMMENT '显示状态',
     `disabled_flag`   tinyint      NOT NULL DEFAULT 0 COMMENT '禁用状态',
     `deleted_flag`    tinyint      NOT NULL DEFAULT 0 COMMENT '删除状态',
+    `deleted_time`    datetime              default NULL COMMENT '删除时间',
     `create_user_id`  bigint       NOT NULL COMMENT '创建人',
     `create_time`     datetime     NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
     `update_user_id`  bigint       NULL     DEFAULT NULL COMMENT '更新人',
@@ -348,6 +351,7 @@ CREATE TABLE `t_notice`
     `author`                 varchar(1000) NULL     DEFAULT NULL COMMENT '作者',
     `document_number`        varchar(1000) NULL     DEFAULT NULL COMMENT '文号，如：〔2022〕字第36号',
     `deleted_flag`           tinyint       NOT NULL DEFAULT 0,
+    `deleted_time`           datetime               default NULL COMMENT '删除时间',
     `create_user_id`         bigint        NULL     DEFAULT NULL COMMENT '创建人',
     `create_time`            datetime      NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
     `update_time`            datetime      NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
@@ -440,6 +444,7 @@ CREATE TABLE `t_position`
     `sort`          int          NULL     DEFAULT 0 COMMENT '排序',
     `remark`        varchar(200) NULL     DEFAULT NULL COMMENT '备注',
     `deleted_flag`  tinyint      NULL     DEFAULT 0,
+    `deleted_time`  datetime              default NULL COMMENT '删除时间',
     `create_time`   datetime     NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
     `update_time`   datetime     NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
     PRIMARY KEY (`position_id`)
