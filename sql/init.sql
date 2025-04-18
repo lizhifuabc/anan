@@ -106,23 +106,6 @@ CREATE TABLE `t_user`
 ) COMMENT = '用户表';
 
 -- ----------------------------
--- Table structure for t_feedback
--- ----------------------------
-DROP TABLE IF EXISTS `t_feedback`;
-CREATE TABLE `t_feedback`
-(
-    `feedback_id`         bigint      NOT NULL AUTO_INCREMENT COMMENT '主键',
-    `feedback_content`    text        NULL COMMENT '反馈内容',
-    `feedback_attachment` varchar(500)         DEFAULT NULL COMMENT '反馈图片',
-    `user_id`             bigint      NOT NULL COMMENT '创建人id',
-    `user_type`           int         NOT NULL COMMENT '创建人用户类型',
-    `user_name`           varchar(50) NOT NULL COMMENT '创建人姓名',
-    `create_time`         datetime    NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
-    `update_time`         datetime    NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
-    PRIMARY KEY (`feedback_id`)
-) COMMENT = '意见反馈';
-
--- ----------------------------
 -- Table structure for t_file
 -- ----------------------------
 DROP TABLE IF EXISTS `t_file`;
