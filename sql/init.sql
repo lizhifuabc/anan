@@ -7,117 +7,6 @@ SET NAMES utf8mb4;
 SET FOREIGN_KEY_CHECKS = 0;
 
 -- ----------------------------
--- Table structure for t_change_log
--- ----------------------------
-DROP TABLE IF EXISTS `t_change_log`;
-CREATE TABLE `t_change_log`  (
-  `change_log_id` bigint(0) NOT NULL AUTO_INCREMENT COMMENT '更新日志id',
-  `version` varchar(255)  NOT NULL COMMENT '版本',
-  `type` int(0) NOT NULL COMMENT '更新类型:[1:特大版本功能更新;2:功能更新;3:bug修复]',
-  `publish_author` varchar(255)  NOT NULL COMMENT '发布人',
-  `public_date` date NOT NULL COMMENT '发布日期',
-  `content` text  NOT NULL COMMENT '更新内容',
-  `link` text  NULL COMMENT '跳转链接',
-  `create_time` datetime(0) NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
-  `update_time` datetime(0) NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP(0) COMMENT '更新时间',
-  PRIMARY KEY (`change_log_id`) USING BTREE,
-  UNIQUE INDEX `version_unique`(`version`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 19  COMMENT = '系统更新日志';
-
--- ----------------------------
--- Records of t_change_log
--- ----------------------------
-INSERT INTO `t_change_log` VALUES (2, 'v1.1.0', 2, '卓大', '2020-05-09', 'SmartAdmin中后台系统 v1.1.0 版本（20200422）正式更新上线，更新内容如下：\n\n1.【新增】增加员工姓名查询\n\n2.【新增】增加文件预览组件\n\n3.【新增】新增四级菜单\n', 'http://smartadmin.1024lab.net/views/1.x/base/About.html', '2022-10-04 21:33:50', '2022-10-04 21:33:50');
-INSERT INTO `t_change_log` VALUES (8, 'v1.0.0', 1, '卓大', '2019-11-01', 'SmartAdmin中后台系统 v1.0.0 版本（20191101）正式更新上线，更新内容如下：\n\n1.【新增】人员管理\n\n2.【新增】系统设置\n\n3.【新增】心跳服务\n\n4.【新增】动态加载\n\n5.【新增】缓存策略\n\n6.【新增】定时任务', 'http://smartadmin.1024lab.net/views/1.x/base/About.html', '2022-10-04 21:33:50', '2022-10-04 21:33:50');
-INSERT INTO `t_change_log` VALUES (9, 'v1.2.0', 2, '卓大', '2020-05-23', 'SmartAdmin中后台系统 v1.2.0 版本（20200515）正式更新上线，更新内容如下：\n\n1.【新增】增加数据权限\n\n2.【新增】帮助文档', NULL, '2022-10-04 21:33:50', '2022-10-04 21:33:50');
-INSERT INTO `t_change_log` VALUES (10, 'v1.2.1', 3, '卓大', '2020-05-24', 'SmartAdmin中后台系统 v1.2.1 版本（20200524）正式更新上线，更新内容如下：\n\n1.【修复】四级菜单权限bug\n\n2.【修复】缓存keepalive的Bug\n\n', NULL, '2022-10-04 21:33:50', '2022-10-04 21:33:50');
-INSERT INTO `t_change_log` VALUES (11, 'v1.3.0', 2, '卓大', '2020-06-01', 'SmartAdmin中后台系统 v1.3.0 版本（20200601）正式更新上线，更新内容如下：\n\n1.【新增】工作台看板功能\n\n2.【新增】天气预报功能\n\n3.【新增】记录上次登录IP功能', NULL, '2022-10-04 21:33:50', '2022-10-04 21:33:50');
-INSERT INTO `t_change_log` VALUES (12, 'v1.4.0', 2, '卓大', '2020-06-06', 'SmartAdmin中后台系统 v1.4.0 版本（20200606）正式更新上线，更新内容如下：\n\n1.【新增】联系客服功能\n\n2.【新增】意见反馈功能', NULL, '2022-10-04 21:33:50', '2022-10-04 21:33:50');
-INSERT INTO `t_change_log` VALUES (13, 'v1.5.0', 2, '卓大', '2020-06-14', 'SmartAdmin中后台系统 v1.5.0 版本（20200614）正式更新上线，更新内容如下：\n\n1.【新增】OA系统\n\n2.【新增】通知公告', NULL, '2022-10-04 21:33:50', '2022-10-04 21:33:50');
-INSERT INTO `t_change_log` VALUES (14, 'v1.6.0', 2, '卓大', '2020-06-17', 'SmartAdmin中后台系统 v1.6.0 版本（20200617）正式更新上线，更新内容如下：\n\n1.【新增】代码生成\n\n2.【新增】通知公告', NULL, '2022-10-04 21:33:50', '2022-10-04 21:33:50');
-INSERT INTO `t_change_log` VALUES (15, 'v2.0.0', 1, '卓大', '2022-10-22', 'SmartAdmin中后台系统 v2.0.0 版本（20191101）正式更新上线，更新内容如下：\n\n1.【新增】人员管理\n\n2.【新增】系统设置\n\n3.【新增】心跳服务\n\n4.【新增】动态加载\n\n5.【新增】缓存策略\n\n6.【新增】定时任务', 'http://smartadmin.1024lab.net/views/1.x/base/About.html', '2022-10-04 21:33:50', '2022-10-04 21:33:50');
-INSERT INTO `t_change_log` VALUES (16, 'v1.7.0', 2, '卓大', '2022-10-22', 'SmartAdmin中后台系统 v1.7.0 版本（20200624）正式更新上线，更新内容如下：\n\n1.【新增】商品管理\n\n2.【新增】商品分类', NULL, '2022-10-04 21:33:50', '2022-10-04 21:33:50');
-INSERT INTO `t_change_log` VALUES (18, 'v3.0.0', 1, '卓大', '2024-01-01', 'SmartAdmin中后台系统 v3.0.0 版本（20240101）正式更新上线，更新内容如下：\n\n\n1、【新增】权限从SpringSecurity 转成 Sa-Token\n\n2、【新增】增加接口 加密、解密功能\n\n3、【新增】增加网络安全相关功能：登录限制、密码复杂度、最大在线时长等\n\n4、【新增】ant desgin vue 为 4.x 最新版本\n\n5、【新增】升级 vite5\n\n6、【新增】swagger增加knife4j接口文档\n\n7、【优化】后端sa-common 改名为 sa-base\n\n8、【优化】优化官网文档说明\n', NULL, '2022-10-04 21:33:50', '2022-10-04 21:33:50');
-
--- ----------------------------
--- Table structure for t_code_generator_config
--- ----------------------------
-DROP TABLE IF EXISTS `t_code_generator_config`;
-CREATE TABLE `t_code_generator_config`  (
-  `table_name` varchar(255)  NOT NULL COMMENT '表名',
-  `basic` text  NULL COMMENT '基础命名信息',
-  `fields` text  NULL COMMENT '字段列表',
-  `insert_and_update` text  NULL COMMENT '新建、修改',
-  `delete_info` text  NULL COMMENT '删除',
-  `query_fields` text  NULL COMMENT '查询',
-  `table_fields` text  NULL COMMENT '列表',
-  `detail` text  NULL COMMENT '详情',
-  `create_time` datetime(0) NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
-  `update_time` datetime(0) NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP(0) COMMENT '更新时间',
-  PRIMARY KEY (`table_name`) USING BTREE,
-  UNIQUE INDEX `table_unique`(`table_name`) USING BTREE
-) ENGINE = InnoDB  COMMENT = '代码生成器的每个表的配置';
-
--- ----------------------------
--- Table structure for t_config
--- ----------------------------
-DROP TABLE IF EXISTS `t_config`;
-CREATE TABLE `t_config`  (
-  `config_id` bigint(0) NOT NULL AUTO_INCREMENT COMMENT '主键',
-  `config_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL COMMENT '参数名字',
-  `config_key` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL COMMENT '参数key',
-  `config_value` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `remark` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
-  `update_time` datetime(0) NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP(0) COMMENT '上次修改时间',
-  `create_time` datetime(0) NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
-  PRIMARY KEY (`config_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 10 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci COMMENT = '系统配置';
-
--- ----------------------------
--- Records of t_config
--- ----------------------------
-INSERT INTO `t_config` VALUES (1, '万能密码', 'super_password', '1024ok', '一路春光啊一路荆棘呀惊鸿一般短暂如夏花一样绚烂这是一个不能停留太久的世界，一路春光啊一路荆棘呀惊鸿一般短暂如夏花一样绚烂这是一个不能停留太久的世界啊', '2024-09-03 21:27:03', '2021-12-16 23:32:46');
-INSERT INTO `t_config` VALUES (2, '三级等保', 'level3_protect_config', '{\n	\"fileDetectFlag\":true,\n	\"loginActiveTimeoutMinutes\":30,\n	\"loginFailLockMinutes\":30,\n	\"loginFailMaxTimes\":3,\n	\"maxUploadFileSizeMb\":30,\n	\"passwordComplexityEnabled\":true,\n	\"regularChangePasswordMonths\":3,\n	\"regularChangePasswordNotAllowRepeatTimes\":3,\n	\"twoFactorLoginEnabled\":false\n}', 'SmartJob Sample2 update', '2024-09-03 21:49:23', '2024-08-13 11:44:49');
-
--- ----------------------------
--- Table structure for t_data_tracer
--- ----------------------------
-DROP TABLE IF EXISTS `t_data_tracer`;
-CREATE TABLE `t_data_tracer`  (
-  `data_tracer_id` bigint(0) NOT NULL AUTO_INCREMENT,
-  `data_id` bigint(0) NOT NULL COMMENT '各种单据的id',
-  `type` int(0) NOT NULL COMMENT '单据类型',
-  `content` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL COMMENT '操作内容',
-  `diff_old` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL COMMENT '差异：旧的数据',
-  `diff_new` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL COMMENT '差异：新的数据',
-  `extra_data` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL COMMENT '额外信息',
-  `user_id` bigint(0) NOT NULL COMMENT '用户id',
-  `user_type` int(0) NOT NULL COMMENT '用户类型：1 后管用户 ',
-  `user_name` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL COMMENT '用户名称',
-  `ip` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL COMMENT 'ip',
-  `ip_region` varchar(1000) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL COMMENT 'ip地区',
-  `user_agent` varchar(2000) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL COMMENT '用户ua',
-  `update_time` datetime(0) NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP(0) COMMENT '更新时间',
-  `create_time` datetime(0) NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
-  PRIMARY KEY (`data_tracer_id`) USING BTREE,
-  INDEX `order_id_order_type`(`data_id`, `type`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 100 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci COMMENT = '各种单据操作记录';
-
--- ----------------------------
--- Records of t_data_tracer
--- ----------------------------
-INSERT INTO `t_data_tracer` VALUES (35, 10, 1, '新增', NULL, NULL, NULL, 47, 1, '善逸', '127.0.0.1', '0|0|0|内网IP|内网IP', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 Safari/537.36 Edg/109.0.1518.61', '2023-10-07 19:02:24', '2023-10-07 19:02:24');
-INSERT INTO `t_data_tracer` VALUES (36, 11, 1, '新增', NULL, NULL, NULL, 1, 1, '管理员', '127.0.0.1', '0|0|0|内网IP|内网IP', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36', '2023-12-01 19:55:53', '2023-12-01 19:55:53');
-INSERT INTO `t_data_tracer` VALUES (37, 12, 1, '新增', NULL, NULL, NULL, 1, 1, '管理员', '127.0.0.1', '0|0|0|内网IP|内网IP', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36', '2023-12-01 19:57:26', '2023-12-01 19:57:26');
-INSERT INTO `t_data_tracer` VALUES (38, 11, 1, '', NULL, NULL, NULL, 1, 1, '管理员', '127.0.0.1', '0|0|0|内网IP|内网IP', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36', '2023-12-01 19:58:09', '2023-12-01 19:58:09');
-INSERT INTO `t_data_tracer` VALUES (39, 2, 3, '修改企业信息', '统一社会信用代码:\"1024lab\"<br/>详细地址:\"1024大楼\"<br/>区县名称:\"洛龙区\"<br/>禁用状态:false<br/>类型:有限企业<br/>城市名称:\"洛阳市\"<br/>删除状态:false<br/>联系人:\"卓大\"<br/>省份名称:\"河南省\"<br/>企业logo:\"public/common/fb827d63dda74a60ab8b4f70cc7c7d0a_20221022145641_jpg\"<br/>联系人电话:\"18637925892\"<br/>企业名称:\"1024创新实验室\"<br/>邮箱:\"lab1024@163.com\"', '营业执照:\"public/common/59b1ca99b7fe45d78678e6295798a699_20231201200459.jpg\"<br/>统一社会信用代码:\"1024lab1\"<br/>详细地址:\"1024大楼\"<br/>区县名称:\"洛龙区\"<br/>禁用状态:false<br/>类型:外资企业<br/>城市名称:\"洛阳市\"<br/>删除状态:false<br/>联系人:\"卓大1\"<br/>省份名称:\"河南省\"<br/>企业logo:\"\"<br/>联系人电话:\"18637925892\"<br/>企业名称:\"1024创新实验室1\"<br/>邮箱:\"lab1024@163.com\"', NULL, 1, 1, '管理员', '127.0.0.1', '0|0|0|内网IP|内网IP', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36', '2023-12-01 20:05:05', '2023-12-01 20:05:05');
-INSERT INTO `t_data_tracer` VALUES (40, 2, 3, '修改企业信息', '营业执照:\"public/common/59b1ca99b7fe45d78678e6295798a699_20231201200459.jpg\"<br/>统一社会信用代码:\"1024lab1\"<br/>详细地址:\"1024大楼\"<br/>区县名称:\"洛龙区\"<br/>禁用状态:false<br/>类型:外资企业<br/>城市名称:\"洛阳市\"<br/>删除状态:false<br/>联系人:\"卓大1\"<br/>省份名称:\"河南省\"<br/>企业logo:\"\"<br/>联系人电话:\"18637925892\"<br/>企业名称:\"1024创新实验室1\"<br/>邮箱:\"lab1024@163.com\"', '营业执照:\"public/common/59b1ca99b7fe45d78678e6295798a699_20231201200459.jpg\"<br/>统一社会信用代码:\"1024lab\"<br/>详细地址:\"1024大楼\"<br/>区县名称:\"洛龙区\"<br/>禁用状态:false<br/>类型:外资企业<br/>城市名称:\"洛阳市\"<br/>删除状态:false<br/>联系人:\"卓大\"<br/>省份名称:\"河南省\"<br/>企业logo:\"\"<br/>联系人电话:\"18637925892\"<br/>企业名称:\"1024创新实验室\"<br/>邮箱:\"lab1024@163.com\"', NULL, 1, 1, '管理员', '127.0.0.1', '0|0|0|内网IP|内网IP', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36', '2023-12-01 20:05:54', '2023-12-01 20:05:54');
-INSERT INTO `t_data_tracer` VALUES (41, 2, 3, '更新银行:<br/>', NULL, NULL, NULL, 1, 1, '管理员', '127.0.0.1', '0|0|0|内网IP|内网IP', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36', '2023-12-01 20:09:17', '2023-12-01 20:09:17');
-INSERT INTO `t_data_tracer` VALUES (42, 2, 3, '更新发票：<br/>删除状态:由【false】变更为【】', NULL, NULL, NULL, 1, 1, '管理员', '127.0.0.1', '0|0|0|内网IP|内网IP', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36', '2023-12-01 20:09:20', '2023-12-01 20:09:20');
-INSERT INTO `t_data_tracer` VALUES (49, 1, 3, '修改企业信息', '营业执照:\"public/common/852b7e19bef94af39c1a6156edf47cfb_20221022170332_jpg\"<br/>统一社会信用代码:\"1024lab_block\"<br/>详细地址:\"区块链大楼\"<br/>区县名称:\"洛龙区\"<br/>禁用状态:false<br/>类型:有限企业<br/>城市名称:\"洛阳市\"<br/>删除状态:false<br/>联系人:\"开云\"<br/>省份名称:\"河南省\"<br/>企业logo:\"public/common/f4a76fa720814949a610f05f6f9545bf_20221022170256_jpg\"<br/>联系人电话:\"18637925892\"<br/>企业名称:\"1024创新区块链实验室\"', '营业执照:\"public/common/1d89055e5680426280446aff1e7e627c_20240306112451.jpeg\"<br/>统一社会信用代码:\"1024lab_block\"<br/>详细地址:\"区块链大楼\"<br/>区县名称:\"洛龙区\"<br/>禁用状态:false<br/>类型:有限企业<br/>城市名称:\"洛阳市\"<br/>删除状态:false<br/>联系人:\"开云\"<br/>省份名称:\"河南省\"<br/>企业logo:\"public/common/34f5ac0fc097402294aea75352c128f0_20240306112435.png\"<br/>联系人电话:\"18637925892\"<br/>企业名称:\"1024创新区块链实验室\"', NULL, 1, 1, '管理员', '127.0.0.1', '0|0|0|内网IP|内网IP', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36', '2024-03-06 11:24:55', '2024-03-06 11:24:55');
-INSERT INTO `t_data_tracer` VALUES (99, 12, 1, '', NULL, NULL, NULL, 1, 1, '管理员', '127.0.0.1', '0|0|0|内网IP|内网IP', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36', '2024-09-03 21:06:32', '2024-09-03 21:06:32');
-
--- ----------------------------
 -- Table structure for t_department
 -- ----------------------------
 DROP TABLE IF EXISTS `t_department`;
@@ -131,18 +20,8 @@ CREATE TABLE `t_department`  (
   `create_time` datetime(0) NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
   PRIMARY KEY (`department_id`) USING BTREE,
   INDEX `parent_id`(`parent_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 9 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci COMMENT = '部门';
+)COMMENT = '部门';
 
--- ----------------------------
--- Records of t_department
--- ----------------------------
-INSERT INTO `t_department` VALUES (1, '1024创新实验室', 1, 0, 1, '2022-10-19 20:17:09', '2022-10-19 20:17:09');
-INSERT INTO `t_department` VALUES (2, '开发部', 44, 1, 1000, '2022-10-19 20:22:23', '2022-10-19 20:22:23');
-INSERT INTO `t_department` VALUES (3, '产品部', 2, 1, 99, '2022-10-21 10:25:30', '2022-10-21 10:25:30');
-INSERT INTO `t_department` VALUES (4, '销售部', 64, 1, 9, '2022-10-21 10:25:47', '2022-10-21 10:25:47');
-INSERT INTO `t_department` VALUES (5, '测试部', 48, 1, 0, '2022-11-05 10:54:18', '2022-11-05 10:54:18');
-INSERT INTO `t_department` VALUES (7, '直播组', 44, 1, 1111, '2024-07-02 19:38:15', '2024-07-02 19:38:15');
-INSERT INTO `t_department` VALUES (8, '抖音组', 47, 7, 0, '2024-07-02 19:39:11', '2024-07-02 19:39:11');
 
 -- ----------------------------
 -- Table structure for t_dict
@@ -159,12 +38,6 @@ CREATE TABLE `t_dict` (
   PRIMARY KEY (`dict_id`),
   UNIQUE KEY `unique_code` (`dict_code`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci COMMENT='字典表';
-
-
--- ----------------------------
--- Records of t_dict
--- ----------------------------
-INSERT INTO `t_dict`(`dict_id`, `dict_name`, `dict_code`, `remark`, `disabled_flag`, `create_time`, `update_time`) VALUES (1, '商品地区', 'GOODS_PLACE', '用于商品管理中的商品地区1', 0, '2025-03-27 14:42:26', '2025-03-31 11:23:03');
 
 -- ----------------------------
 -- Table structure for t_dict_data
@@ -213,7 +86,7 @@ CREATE TABLE `t_employee`  (
   `update_time` datetime(0) NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP(0) COMMENT '更新时间',
   `create_time` datetime(0) NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
   PRIMARY KEY (`employee_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 75 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci COMMENT = '员工表';
+) AUTO_INCREMENT = 75 COMMENT = '员工表';
 
 -- ----------------------------
 -- Records of t_employee
@@ -247,7 +120,7 @@ CREATE TABLE `t_feedback`  (
   `create_time` datetime(0) NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
   `update_time` datetime(0) NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP(0) COMMENT '更新时间',
   PRIMARY KEY (`feedback_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 14 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci COMMENT = '意见反馈';
+) AUTO_INCREMENT = 14 COMMENT = '意见反馈';
 
 -- ----------------------------
 -- Table structure for t_file
@@ -269,7 +142,7 @@ CREATE TABLE `t_file`  (
   UNIQUE INDEX `uk_file_key`(`file_key`) USING BTREE,
   INDEX `module_id_module_type`(`folder_type`) USING BTREE,
   INDEX `module_type`(`folder_type`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 108  COMMENT = '文件';
+) AUTO_INCREMENT = 108  COMMENT = '文件';
 
 -- ----------------------------
 -- Table structure for t_goods
@@ -288,7 +161,7 @@ CREATE TABLE `t_goods`  (
   `update_time` datetime(0) NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP(0),
   `create_time` datetime(0) NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`goods_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 34  COMMENT = '商品';
+) AUTO_INCREMENT = 34  COMMENT = '商品';
 
 -- ----------------------------
 -- Records of t_goods
@@ -312,7 +185,7 @@ CREATE TABLE `t_heart_beat_record`  (
   `process_start_time` datetime(0) NOT NULL COMMENT '进程开启时间',
   `heart_beat_time` datetime(0) NOT NULL COMMENT '心跳时间',
   PRIMARY KEY (`heart_beat_record_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 188  COMMENT = '公用服务 - 服务心跳';
+) AUTO_INCREMENT = 188  COMMENT = '公用服务 - 服务心跳';
 
 -- ----------------------------
 -- Table structure for t_help_doc
@@ -332,7 +205,7 @@ CREATE TABLE `t_help_doc`  (
   `update_time` datetime(0) NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP(0),
   `create_time` datetime(0) NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`help_doc_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 35  COMMENT = '帮助文档';
+) AUTO_INCREMENT = 35  COMMENT = '帮助文档';
 
 -- ----------------------------
 -- Records of t_help_doc
@@ -352,7 +225,7 @@ CREATE TABLE `t_help_doc_catalog`  (
   `create_time` datetime(0) NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `update_time` datetime(0) NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP(0),
   PRIMARY KEY (`help_doc_catalog_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 12  COMMENT = '帮助文档-目录';
+) AUTO_INCREMENT = 12  COMMENT = '帮助文档-目录';
 
 -- ----------------------------
 -- Records of t_help_doc_catalog
@@ -374,7 +247,7 @@ CREATE TABLE `t_help_doc_relation`  (
   `update_time` datetime(0) NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP(0),
   PRIMARY KEY (`relation_id`, `help_doc_id`) USING BTREE,
   UNIQUE INDEX `uni_menu_help_doc`(`relation_id`, `help_doc_id`) USING BTREE
-) ENGINE = InnoDB  COMMENT = '帮助文档-关联表';
+) COMMENT = '帮助文档-关联表';
 
 -- ----------------------------
 -- Records of t_help_doc_relation
@@ -399,7 +272,7 @@ CREATE TABLE `t_help_doc_view_record`  (
   `update_time` datetime(0) NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP(0),
   PRIMARY KEY (`help_doc_id`, `user_id`) USING BTREE,
   UNIQUE INDEX `uk_notice_employee`(`help_doc_id`, `user_id`) USING BTREE COMMENT '资讯员工'
-) ENGINE = InnoDB  COMMENT = '帮助文档-查看记录';
+) COMMENT = '帮助文档-查看记录';
 
 -- ----------------------------
 -- Table structure for t_login_fail
@@ -417,7 +290,7 @@ CREATE TABLE `t_login_fail`  (
   `update_time` datetime(0) NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP(0) COMMENT '更新时间',
   PRIMARY KEY (`login_fail_id`) USING BTREE,
   UNIQUE INDEX `uid_and_utype`(`user_id`, `user_type`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 85  COMMENT = '登录失败次数记录表';
+) AUTO_INCREMENT = 85  COMMENT = '登录失败次数记录表';
 
 -- ----------------------------
 -- Table structure for t_login_log
@@ -454,7 +327,7 @@ CREATE TABLE `t_mail_template`  (
   `create_time` datetime(0) NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
   PRIMARY KEY (`template_code`) USING BTREE,
   UNIQUE INDEX `template_code`(`template_code`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 2 ;
+) AUTO_INCREMENT = 2 ;
 
 -- ----------------------------
 -- Records of t_mail_template
@@ -489,7 +362,7 @@ CREATE TABLE `t_menu`  (
   `update_user_id` bigint(0) NULL DEFAULT NULL COMMENT '更新人',
   `update_time` datetime(0) NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP(0) COMMENT '更新时间',
   PRIMARY KEY (`menu_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 268  COMMENT = '菜单表';
+) AUTO_INCREMENT = 268  COMMENT = '菜单表';
 
 -- ----------------------------
 -- Records of t_menu
@@ -654,7 +527,7 @@ CREATE TABLE `t_message`  (
   `update_time` datetime(0) NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP(0) COMMENT '更新时间',
   PRIMARY KEY (`message_id`) USING BTREE,
   INDEX `idx_msg`(`message_type`, `receiver_user_type`, `receiver_user_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 5  COMMENT = '通知消息';
+) AUTO_INCREMENT = 5  COMMENT = '通知消息';
 
 -- ----------------------------
 -- Records of t_message
@@ -688,7 +561,7 @@ CREATE TABLE `t_notice`  (
   `update_time` datetime(0) NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP(0),
   `create_time` datetime(0) NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`notice_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 65  COMMENT = '通知';
+) AUTO_INCREMENT = 65  COMMENT = '通知';
 
 -- ----------------------------
 -- Records of t_notice
@@ -716,7 +589,7 @@ CREATE TABLE `t_notice_type`  (
   `create_time` datetime(0) NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `update_time` datetime(0) NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP(0),
   PRIMARY KEY (`notice_type_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 4  COMMENT = '通知类型';
+) AUTO_INCREMENT = 4  COMMENT = '通知类型';
 
 -- ----------------------------
 -- Records of t_notice_type
@@ -740,7 +613,7 @@ CREATE TABLE `t_notice_view_record`  (
   `update_time` datetime(0) NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP(0),
   PRIMARY KEY (`notice_id`, `employee_id`) USING BTREE,
   UNIQUE INDEX `uk_notice_employee`(`notice_id`, `employee_id`) USING BTREE COMMENT '资讯员工'
-) ENGINE = InnoDB  COMMENT = '通知查看记录';
+) COMMENT = '通知查看记录';
 
 -- ----------------------------
 -- Table structure for t_notice_visible_range
@@ -752,7 +625,7 @@ CREATE TABLE `t_notice_visible_range`  (
   `data_id` bigint(0) NOT NULL COMMENT '员工or部门id',
   `create_time` datetime(0) NOT NULL DEFAULT CURRENT_TIMESTAMP,
   UNIQUE INDEX `uk_notice_data`(`notice_id`, `data_type`, `data_id`) USING BTREE
-) ENGINE = InnoDB  COMMENT = '通知可见范围';
+) COMMENT = '通知可见范围';
 
 -- ----------------------------
 -- Records of t_notice_visible_range
@@ -779,7 +652,7 @@ CREATE TABLE `t_oa_bank`  (
   `update_time` datetime(0) NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP(0) COMMENT '更新时间',
   PRIMARY KEY (`bank_id`) USING BTREE,
   INDEX `idx_enterprise_id`(`enterprise_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 29  COMMENT = 'OA银行信息\n';
+) AUTO_INCREMENT = 29  COMMENT = 'OA银行信息\n';
 
 -- ----------------------------
 -- Records of t_oa_bank
@@ -815,7 +688,7 @@ CREATE TABLE `t_oa_enterprise`  (
   `create_time` datetime(0) NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
   `update_time` datetime(0) NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP(0) COMMENT '更新时间',
   PRIMARY KEY (`enterprise_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 127  COMMENT = 'OA企业模块\r\n';
+) AUTO_INCREMENT = 127  COMMENT = 'OA企业模块\r\n';
 
 -- ----------------------------
 -- Records of t_oa_enterprise
@@ -837,7 +710,7 @@ CREATE TABLE `t_oa_enterprise_employee`  (
   UNIQUE INDEX `uk_enterprise_employee`(`enterprise_id`, `employee_id`) USING BTREE,
   INDEX `idx_employee_id`(`employee_id`) USING BTREE,
   INDEX `idx_enterprise_id`(`enterprise_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 159  COMMENT = '企业关联的员工';
+) AUTO_INCREMENT = 159  COMMENT = '企业关联的员工';
 
 -- ----------------------------
 -- Records of t_oa_enterprise_employee
@@ -865,7 +738,7 @@ CREATE TABLE `t_oa_invoice`  (
   `update_time` datetime(0) NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP(0) COMMENT '更新时间',
   PRIMARY KEY (`invoice_id`) USING BTREE,
   INDEX `idx_enterprise_id`(`enterprise_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 17  COMMENT = 'OA发票信息\n';
+) AUTO_INCREMENT = 17  COMMENT = 'OA发票信息\n';
 
 -- ----------------------------
 -- Records of t_oa_invoice
@@ -894,7 +767,7 @@ CREATE TABLE `t_operate_log`  (
   `update_time` datetime(0) NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP(0) COMMENT '更新时间',
   `create_time` datetime(0) NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
   PRIMARY KEY (`operate_log_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 4470 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci COMMENT = '操作记录';
+) AUTO_INCREMENT = 4470 COMMENT = '操作记录';
 
 -- ----------------------------
 -- Table structure for t_password_log
@@ -910,7 +783,7 @@ CREATE TABLE `t_password_log`  (
   `create_time` datetime(0) NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `user_and_type_index`(`user_id`, `user_type`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 12  COMMENT = '密码修改记录';
+) AUTO_INCREMENT = 12  COMMENT = '密码修改记录';
 
 -- ----------------------------
 -- Table structure for t_position
@@ -926,7 +799,7 @@ CREATE TABLE `t_position`  (
   `create_time` datetime(0) NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `update_time` datetime(0) NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP(0),
   PRIMARY KEY (`position_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 7  COMMENT = '职务表';
+) AUTO_INCREMENT = 7  COMMENT = '职务表';
 
 -- ----------------------------
 -- Records of t_position
@@ -947,7 +820,7 @@ CREATE TABLE `t_reload_item`  (
   `update_time` datetime(0) NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP(0),
   `create_time` datetime(0) NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`tag`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci COMMENT = 'reload项目';
+) COMMENT = 'reload项目';
 
 -- ----------------------------
 -- Records of t_reload_item
@@ -965,7 +838,7 @@ CREATE TABLE `t_reload_result`  (
   `result` tinyint unsigned NOT NULL COMMENT '是否成功 ',
   `exception` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL,
   `create_time` datetime(0) NOT NULL DEFAULT CURRENT_TIMESTAMP
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci COMMENT = 'reload结果';
+) COMMENT = 'reload结果';
 
 -- ----------------------------
 -- Table structure for t_role
@@ -980,7 +853,7 @@ CREATE TABLE `t_role`  (
   `create_time` datetime(0) NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
   PRIMARY KEY (`role_id`) USING BTREE,
   UNIQUE INDEX `role_code_uni`(`role_code`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 59 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '角色表';
+) AUTO_INCREMENT = 59 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '角色表';
 
 -- ----------------------------
 -- Records of t_role
@@ -1003,7 +876,7 @@ CREATE TABLE `t_role_data_scope`  (
   `update_time` datetime(0) NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP(0) COMMENT '更新时间',
   `create_time` datetime(0) NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 69 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci COMMENT = '角色的数据范围';
+) AUTO_INCREMENT = 69 COMMENT = '角色的数据范围';
 
 -- ----------------------------
 -- Records of t_role_data_scope
@@ -1022,7 +895,7 @@ CREATE TABLE `t_role_employee`  (
   `create_time` datetime(0) NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
   PRIMARY KEY (`id`) USING BTREE,
   UNIQUE INDEX `uk_role_employee`(`role_id`, `employee_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 342 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci COMMENT = '角色员工功能表';
+) AUTO_INCREMENT = 342 COMMENT = '角色员工功能表';
 
 -- ----------------------------
 -- Records of t_role_employee
@@ -1047,7 +920,7 @@ CREATE TABLE `t_role_menu`  (
   PRIMARY KEY (`role_menu_id`) USING BTREE,
   INDEX `idx_role_id`(`role_id`) USING BTREE,
   INDEX `idx_menu_id`(`menu_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 820 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci COMMENT = '角色-菜单\n';
+) AUTO_INCREMENT = 820 COMMENT = '角色-菜单\n';
 
 -- ----------------------------
 -- Records of t_role_menu
@@ -1167,7 +1040,7 @@ CREATE TABLE `t_serial_number`  (
   `create_time` datetime(0) NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`serial_number_id`) USING BTREE,
   UNIQUE INDEX `key_name`(`business_name`) USING BTREE
-) ENGINE = InnoDB  COMMENT = '单号生成器定义表';
+) COMMENT = '单号生成器定义表';
 
 -- ----------------------------
 -- Records of t_serial_number
@@ -1188,7 +1061,7 @@ CREATE TABLE `t_serial_number_record`  (
   `update_time` datetime(0) NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP(0),
   `create_time` datetime(0) NULL DEFAULT CURRENT_TIMESTAMP,
   INDEX `uk_generator`(`serial_number_id`, `record_date`) USING BTREE
-) ENGINE = InnoDB  COMMENT = 'serial_number记录表';
+) COMMENT = 'serial_number记录表';
 
 
 -- ----------------------------
@@ -1212,7 +1085,7 @@ CREATE TABLE `t_smart_job`  (
   `create_time` datetime(0) NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `update_time` datetime(0) NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP(0),
   PRIMARY KEY (`job_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 4  COMMENT = '定时任务配置 @listen';
+) AUTO_INCREMENT = 4  COMMENT = '定时任务配置 @listen';
 
 -- ----------------------------
 -- Records of t_smart_job
@@ -1242,7 +1115,7 @@ CREATE TABLE `t_smart_job_log`  (
   `create_time` datetime(0) NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`log_id`) USING BTREE,
   INDEX `idx_job_id`(`job_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 7933  COMMENT = '定时任务-执行记录 @listen';
+) AUTO_INCREMENT = 7933  COMMENT = '定时任务-执行记录 @listen';
 
 -- ----------------------------
 -- Table structure for t_table_column
@@ -1258,6 +1131,6 @@ CREATE TABLE `t_table_column`  (
   `update_time` datetime(0) NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP(0),
   PRIMARY KEY (`table_column_id`) USING BTREE,
   UNIQUE INDEX `uni_employee_table`(`user_id`, `table_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 6  COMMENT = '表格的自定义列存储';
+) AUTO_INCREMENT = 6  COMMENT = '表格的自定义列存储';
 
 SET FOREIGN_KEY_CHECKS = 1;
