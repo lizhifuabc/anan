@@ -102,7 +102,8 @@ CREATE TABLE `t_user`
     `remark`             varchar(200)          DEFAULT NULL COMMENT '备注',
     `create_time`        datetime     NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
     `update_time`        datetime     NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
-    PRIMARY KEY (`user_id`)
+    PRIMARY KEY (`user_id`),
+    unique key  `uk_login_name` (`login_name`)
 ) COMMENT = '用户表';
 
 -- ----------------------------
