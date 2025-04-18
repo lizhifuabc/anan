@@ -17,8 +17,8 @@ CREATE TABLE `t_config`
     `config_key`   varchar(255) NOT NULL COMMENT '参数key',
     `config_value` text         NOT NULL,
     `remark`       varchar(255) NULL     DEFAULT NULL,
-    `update_time`  datetime     NULL     DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '上次修改时间',
     `create_time`  datetime     NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+    `update_time`  datetime     NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
     PRIMARY KEY (`config_id`)
 ) COMMENT = '系统配置';
 
@@ -33,8 +33,8 @@ CREATE TABLE `t_department`
     `manager_id`    bigint      NULL     DEFAULT NULL COMMENT '部门负责人id',
     `parent_id`     bigint      NOT NULL DEFAULT 0 COMMENT '部门的父级id',
     `sort`          int         NOT NULL COMMENT '部门排序',
-    `update_time`   datetime    NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '更新时间',
     `create_time`   datetime    NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+    `update_time`   datetime    NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
     PRIMARY KEY (`department_id`),
     INDEX `parent_id` (`parent_id`)
 ) COMMENT = '部门';
@@ -85,7 +85,7 @@ CREATE TABLE `t_user`
     `login_pwd`          varchar(100)     NOT NULL COMMENT '登录密码',
     `actual_name`        varchar(30)      NOT NULL COMMENT '用户名称',
     `avatar`             varchar(200)     NULL     DEFAULT NULL,
-    `gender`             tinyint(1)       NOT NULL DEFAULT 0 COMMENT '性别',
+    `gender`             tinyint          NOT NULL DEFAULT 0 COMMENT '性别',
     `phone`              varchar(15)      NULL     DEFAULT NULL COMMENT '手机号码',
     `department_id`      bigint           NOT NULL COMMENT '部门id',
     `position_id`        bigint           NULL     DEFAULT NULL COMMENT '职务ID',
@@ -94,8 +94,8 @@ CREATE TABLE `t_user`
     `deleted_flag`       tinyint unsigned NOT NULL COMMENT '是否删除0否 1是',
     `administrator_flag` tinyint          NOT NULL DEFAULT 0 COMMENT '是否为超级管理员: 0 不是，1是',
     `remark`             varchar(200)     NULL     DEFAULT NULL COMMENT '备注',
-    `update_time`        datetime         NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
     `create_time`        datetime         NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+    `update_time`        datetime         NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
     PRIMARY KEY (`user_id`)
 ) COMMENT = '用户表';
 
@@ -131,8 +131,8 @@ CREATE TABLE `t_file`
     `creator_id`        bigint           NULL     DEFAULT NULL COMMENT '创建人，即上传人',
     `creator_user_type` int              NULL     DEFAULT NULL COMMENT '创建人用户类型',
     `creator_name`      varchar(100)     NULL     DEFAULT NULL COMMENT '创建人姓名',
-    `update_time`       datetime         NULL     DEFAULT CURRENT_TIMESTAMP COMMENT '上次更新时间',
     `create_time`       datetime         NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+    `update_time`       datetime         NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
     PRIMARY KEY (`file_id`),
     UNIQUE INDEX `uk_file_key` (`file_key`),
     INDEX `module_id_module_type` (`folder_type`),
@@ -156,8 +156,8 @@ CREATE TABLE `t_help_doc`
     `page_view_count`     int           NOT NULL DEFAULT 0 COMMENT '页面浏览量，传说中的pv',
     `user_view_count`     int           NOT NULL DEFAULT 0 COMMENT '用户浏览量，传说中的uv',
     `author`              varchar(1000) NULL     DEFAULT NULL COMMENT '作者',
-    `update_time`         datetime      NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-    `create_time`         datetime      NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    `create_time`         datetime      NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+    `update_time`         datetime      NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
     PRIMARY KEY (`help_doc_id`)
 ) COMMENT = '帮助文档';
 
@@ -172,8 +172,8 @@ CREATE TABLE `t_help_doc_catalog`
     `name`                varchar(1000) NOT NULL COMMENT '名称',
     `sort`                int           NOT NULL DEFAULT 0 COMMENT '排序字段',
     `parent_id`           bigint        NOT NULL COMMENT '父级id',
-    `create_time`         datetime      NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    `update_time`         datetime      NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    `create_time`         datetime      NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+    `update_time`         datetime      NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
     PRIMARY KEY (`help_doc_catalog_id`)
 ) COMMENT = '帮助文档-目录';
 
@@ -184,10 +184,10 @@ DROP TABLE IF EXISTS `t_help_doc_relation`;
 CREATE TABLE `t_help_doc_relation`
 (
     `relation_id`   bigint       NOT NULL COMMENT '关联id',
-    `relation_name` varchar(255) NULL DEFAULT NULL COMMENT '关联名称',
+    `relation_name` varchar(255) NULL     DEFAULT NULL COMMENT '关联名称',
     `help_doc_id`   bigint       NOT NULL COMMENT '文档id',
-    `create_time`   datetime     NULL DEFAULT CURRENT_TIMESTAMP,
-    `update_time`   datetime     NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    `create_time`   datetime     NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+    `update_time`   datetime     NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
     PRIMARY KEY (`relation_id`, `help_doc_id`),
     UNIQUE INDEX `uni_menu_help_doc` (`relation_id`, `help_doc_id`)
 ) COMMENT = '帮助文档-关联表';
@@ -206,8 +206,8 @@ CREATE TABLE `t_help_doc_view_record`
     `first_user_agent` varchar(1000) NULL     DEFAULT NULL COMMENT '首次用户设备等标识',
     `last_ip`          varchar(255)  NULL     DEFAULT NULL COMMENT '最后一次ip',
     `last_user_agent`  varchar(1000) NULL     DEFAULT NULL COMMENT '最后一次用户设备等标识',
-    `create_time`      datetime      NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    `update_time`      datetime      NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    `create_time`      datetime      NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+    `update_time`      datetime      NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
     PRIMARY KEY (`help_doc_id`, `user_id`),
     UNIQUE INDEX `uk_notice_user` (`help_doc_id`, `user_id`) COMMENT '资讯用户'
 ) COMMENT = '帮助文档-查看记录';
@@ -221,12 +221,12 @@ CREATE TABLE `t_login_fail`
     `login_fail_id`         bigint        NOT NULL AUTO_INCREMENT COMMENT '自增id',
     `user_id`               bigint        NOT NULL COMMENT '用户id',
     `user_type`             int           NOT NULL COMMENT '用户类型',
-    `login_name`            varchar(1000) NULL DEFAULT NULL COMMENT '登录名',
-    `login_fail_count`      int           NULL DEFAULT NULL COMMENT '连续登录失败次数',
-    `lock_flag`             tinyint       NULL DEFAULT 0 COMMENT '锁定状态:1锁定，0未锁定',
-    `login_lock_begin_time` datetime      NULL DEFAULT NULL COMMENT '连续登录失败锁定开始时间',
-    `create_time`           datetime      NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
-    `update_time`           datetime      NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
+    `login_name`            varchar(1000) NULL     DEFAULT NULL COMMENT '登录名',
+    `login_fail_count`      int           NULL     DEFAULT NULL COMMENT '连续登录失败次数',
+    `lock_flag`             tinyint       NULL     DEFAULT 0 COMMENT '锁定状态:1锁定，0未锁定',
+    `login_lock_begin_time` datetime      NULL     DEFAULT NULL COMMENT '连续登录失败锁定开始时间',
+    `create_time`           datetime      NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+    `update_time`           datetime      NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
     PRIMARY KEY (`login_fail_id`),
     UNIQUE INDEX `uid_and_utype` (`user_id`, `user_type`)
 ) COMMENT = '登录失败次数记录表';
@@ -247,8 +247,8 @@ CREATE TABLE `t_login_log`
     `login_device`    varchar(1000)          DEFAULT NULL COMMENT '登录设备',
     `login_result`    int           NOT NULL COMMENT '登录结果：0成功 1失败 2 退出',
     `remark`          varchar(2000)          DEFAULT NULL COMMENT '备注',
-    `update_time`     datetime      NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
     `create_time`     datetime      NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+    `update_time`     datetime      NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
     PRIMARY KEY (`login_log_id`),
     KEY `customer_id` (`user_id`)
 ) COMMENT ='用户登录日志';
@@ -263,9 +263,9 @@ CREATE TABLE `t_mail_template`
     `template_subject` varchar(100) NOT NULL COMMENT '模板名称',
     `template_content` longtext     NOT NULL COMMENT '模板内容',
     `template_type`    varchar(50)  NOT NULL COMMENT '解析类型 string，freemarker',
-    `disable_flag`     tinyint(1)   NOT NULL DEFAULT 0 COMMENT '是否禁用',
-    `update_time`      datetime     NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '创建时间',
+    `disable_flag`     tinyint      NOT NULL DEFAULT 0 COMMENT '是否禁用',
     `create_time`      datetime     NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+    `update_time`      datetime     NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
     PRIMARY KEY (`template_code`),
     UNIQUE INDEX `template_code` (`template_code`)
 ) comment ='邮件模板';
@@ -288,12 +288,12 @@ CREATE TABLE `t_menu`
     `web_perms`       text         NULL COMMENT '前端权限字符串',
     `icon`            varchar(100) NULL     DEFAULT NULL COMMENT '菜单图标',
     `context_menu_id` bigint       NULL     DEFAULT NULL COMMENT '功能点关联菜单ID',
-    `frame_flag`      tinyint(1)   NOT NULL DEFAULT 0 COMMENT '是否为外链',
+    `frame_flag`      tinyint      NOT NULL DEFAULT 0 COMMENT '是否为外链',
     `frame_url`       text         NULL COMMENT '外链地址',
-    `cache_flag`      tinyint(1)   NOT NULL DEFAULT 0 COMMENT '是否缓存',
-    `visible_flag`    tinyint(1)   NOT NULL DEFAULT 1 COMMENT '显示状态',
-    `disabled_flag`   tinyint(1)   NOT NULL DEFAULT 0 COMMENT '禁用状态',
-    `deleted_flag`    tinyint(1)   NOT NULL DEFAULT 0 COMMENT '删除状态',
+    `cache_flag`      tinyint      NOT NULL DEFAULT 0 COMMENT '是否缓存',
+    `visible_flag`    tinyint      NOT NULL DEFAULT 1 COMMENT '显示状态',
+    `disabled_flag`   tinyint      NOT NULL DEFAULT 0 COMMENT '禁用状态',
+    `deleted_flag`    tinyint      NOT NULL DEFAULT 0 COMMENT '删除状态',
     `create_user_id`  bigint       NOT NULL COMMENT '创建人',
     `create_time`     datetime     NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
     `update_user_id`  bigint       NULL     DEFAULT NULL COMMENT '更新人',
@@ -314,7 +314,7 @@ CREATE TABLE `t_message`
     `data_id`            varchar(500)  NULL     DEFAULT '' COMMENT '相关数据id',
     `title`              varchar(1000) NOT NULL COMMENT '标题',
     `content`            text          NOT NULL COMMENT '内容',
-    `read_flag`          tinyint(1)    NOT NULL DEFAULT 0 COMMENT '是否已读',
+    `read_flag`          tinyint       NOT NULL DEFAULT 0 COMMENT '是否已读',
     `read_time`          datetime      NULL     DEFAULT NULL COMMENT '已读时间',
     `create_time`        datetime      NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
     `update_time`        datetime      NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
@@ -331,8 +331,8 @@ CREATE TABLE `t_notice`
     `notice_id`              bigint        NOT NULL AUTO_INCREMENT,
     `notice_type_id`         bigint        NOT NULL COMMENT '类型1公告 2动态',
     `title`                  varchar(200)  NOT NULL COMMENT '标题',
-    `all_visible_flag`       tinyint(1)    NOT NULL COMMENT '是否全部可见',
-    `scheduled_publish_flag` tinyint(1)    NOT NULL COMMENT '是否定时发布',
+    `all_visible_flag`       tinyint       NOT NULL COMMENT '是否全部可见',
+    `scheduled_publish_flag` tinyint       NOT NULL COMMENT '是否定时发布',
     `publish_time`           datetime      NOT NULL COMMENT '发布时间',
     `content_text`           text          NOT NULL COMMENT '文本内容',
     `content_html`           text          NOT NULL COMMENT 'html内容',
@@ -341,11 +341,11 @@ CREATE TABLE `t_notice`
     `user_view_count`        int           NOT NULL DEFAULT 0 COMMENT '用户浏览量，传说中的uv',
     `source`                 varchar(1000) NULL     DEFAULT NULL COMMENT '来源',
     `author`                 varchar(1000) NULL     DEFAULT NULL COMMENT '作者',
-    `document_number`        varchar(1000) NULL     DEFAULT NULL COMMENT '文号，如：1024创新实验室发〔2022〕字第36号',
-    `deleted_flag`           tinyint(1)    NOT NULL DEFAULT 0,
+    `document_number`        varchar(1000) NULL     DEFAULT NULL COMMENT '文号，如：〔2022〕字第36号',
+    `deleted_flag`           tinyint       NOT NULL DEFAULT 0,
     `create_user_id`         bigint        NULL     DEFAULT NULL COMMENT '创建人',
-    `update_time`            datetime      NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-    `create_time`            datetime      NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    `create_time`            datetime      NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+    `update_time`            datetime      NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
     PRIMARY KEY (`notice_id`)
 ) COMMENT = '通知';
 
@@ -357,8 +357,8 @@ CREATE TABLE `t_notice_type`
 (
     `notice_type_id`   bigint        NOT NULL AUTO_INCREMENT COMMENT '通知类型',
     `notice_type_name` varchar(1000) NOT NULL COMMENT '类型名称',
-    `create_time`      datetime      NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    `update_time`      datetime      NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    `create_time`      datetime      NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+    `update_time`      datetime      NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
     PRIMARY KEY (`notice_type_id`)
 ) COMMENT = '通知类型';
 
@@ -375,8 +375,8 @@ CREATE TABLE `t_notice_view_record`
     `first_user_agent` varchar(1000) NULL     DEFAULT NULL COMMENT '首次用户设备等标识',
     `last_ip`          varchar(255)  NULL     DEFAULT NULL COMMENT '最后一次ip',
     `last_user_agent`  varchar(1000) NULL     DEFAULT NULL COMMENT '最后一次用户设备等标识',
-    `create_time`      datetime      NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    `update_time`      datetime      NULL     DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    `create_time`      datetime      NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+    `update_time`      datetime      NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
     PRIMARY KEY (`notice_id`, `user_id`),
     UNIQUE INDEX `uk_notice_user` (`notice_id`, `user_id`) COMMENT '资讯用户'
 ) COMMENT = '通知查看记录';
@@ -401,8 +401,8 @@ CREATE TABLE `t_operate_log`
     `user_agent`        text          NULL COMMENT '请求user-agent',
     `success_flag`      tinyint       NULL     DEFAULT NULL COMMENT '请求结果 0失败 1成功',
     `fail_reason`       longtext      NULL COMMENT '失败原因',
-    `update_time`       datetime      NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
     `create_time`       datetime      NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+    `update_time`       datetime      NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
     PRIMARY KEY (`operate_log_id`)
 ) COMMENT = '操作记录';
 
@@ -417,8 +417,8 @@ CREATE TABLE `t_password_log`
     `user_type`    tinyint      NOT NULL COMMENT '用户类型',
     `old_password` varchar(255) NOT NULL COMMENT '旧密码',
     `new_password` varchar(255) NULL     DEFAULT NULL COMMENT '新密码',
-    `update_time`  datetime     NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '创建时间',
     `create_time`  datetime     NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+    `update_time`  datetime     NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
     PRIMARY KEY (`id`),
     INDEX `user_and_type_index` (`user_id`, `user_type`)
 ) COMMENT = '密码修改记录';
@@ -434,9 +434,9 @@ CREATE TABLE `t_position`
     `level`         varchar(200) NULL     DEFAULT NULL COMMENT '职级',
     `sort`          int          NULL     DEFAULT 0 COMMENT '排序',
     `remark`        varchar(200) NULL     DEFAULT NULL COMMENT '备注',
-    `deleted_flag`  tinyint(1)   NULL     DEFAULT 0,
-    `create_time`   datetime     NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    `update_time`   datetime     NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    `deleted_flag`  tinyint      NULL     DEFAULT 0,
+    `create_time`   datetime     NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+    `update_time`   datetime     NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
     PRIMARY KEY (`position_id`)
 ) COMMENT = '职务表';
 
@@ -450,8 +450,8 @@ CREATE TABLE `t_role`
     `role_name`   varchar(20)  NOT NULL COMMENT '角色名称',
     `role_code`   varchar(500) NULL     DEFAULT NULL COMMENT '角色编码',
     `remark`      varchar(255) NULL     DEFAULT NULL COMMENT '角色描述',
-    `update_time` datetime     NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '创建时间',
     `create_time` datetime     NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+    `update_time` datetime     NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
     PRIMARY KEY (`role_id`),
     UNIQUE INDEX `role_code_uni` (`role_code`)
 ) COMMENT = '角色表';
@@ -465,8 +465,8 @@ CREATE TABLE `t_role_user`
     `id`          bigint   NOT NULL AUTO_INCREMENT,
     `role_id`     bigint   NOT NULL COMMENT '角色id',
     `user_id`     bigint   NOT NULL COMMENT '用户id',
-    `update_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
     `create_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+    `update_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
     PRIMARY KEY (`id`),
     UNIQUE INDEX `uk_role_user` (`role_id`, `user_id`)
 ) COMMENT = '角色用户功能表';
@@ -480,8 +480,8 @@ CREATE TABLE `t_role_menu`
     `role_menu_id` bigint   NOT NULL AUTO_INCREMENT COMMENT '主键id',
     `role_id`      bigint   NOT NULL COMMENT '角色id',
     `menu_id`      bigint   NOT NULL COMMENT '菜单id',
-    `update_time`  datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
     `create_time`  datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+    `update_time`  datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
     PRIMARY KEY (`role_menu_id`),
     INDEX `idx_role_id` (`role_id`),
     INDEX `idx_menu_id` (`menu_id`)
@@ -495,15 +495,15 @@ CREATE TABLE `t_serial_number`
 (
     `serial_number_id`  int          NOT NULL,
     `business_name`     varchar(50)  NOT NULL COMMENT '业务名称',
-    `format`            varchar(50)  NULL DEFAULT NULL COMMENT '格式[yyyy]表示年,[mm]标识月,[dd]表示日,[nnn]表示三位数字',
+    `format`            varchar(50)  NULL     DEFAULT NULL COMMENT '格式[yyyy]表示年,[mm]标识月,[dd]表示日,[nnn]表示三位数字',
     `rule_type`         varchar(20)  NOT NULL COMMENT '规则格式。none没有周期, year 年周期, month月周期, day日周期',
     `init_number`       int unsigned NOT NULL COMMENT '初始值',
     `step_random_range` int unsigned NOT NULL COMMENT '步长随机数',
-    `remark`            varchar(255) NULL DEFAULT NULL COMMENT '备注',
-    `last_number`       bigint       NULL DEFAULT NULL COMMENT '上次产生的单号, 默认为空',
-    `last_time`         datetime     NULL DEFAULT NULL COMMENT '上次产生的单号时间',
-    `update_time`       datetime     NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-    `create_time`       datetime     NULL DEFAULT CURRENT_TIMESTAMP,
+    `remark`            varchar(255) NULL     DEFAULT NULL COMMENT '备注',
+    `last_number`       bigint       NULL     DEFAULT NULL COMMENT '上次产生的单号, 默认为空',
+    `last_time`         datetime     NULL     DEFAULT NULL COMMENT '上次产生的单号时间',
+    `create_time`       datetime     NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+    `update_time`       datetime     NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
     PRIMARY KEY (`serial_number_id`),
     UNIQUE INDEX `key_name` (`business_name`)
 ) COMMENT = '单号生成器定义表';
@@ -519,8 +519,8 @@ CREATE TABLE `t_serial_number_record`
     `last_number`      bigint   NOT NULL DEFAULT 0 COMMENT '最后更新值',
     `last_time`        datetime NOT NULL COMMENT '最后更新时间',
     `count`            bigint   NOT NULL DEFAULT 0 COMMENT '更新次数',
-    `update_time`      datetime NULL     DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-    `create_time`      datetime NULL     DEFAULT CURRENT_TIMESTAMP,
+    `create_time`      datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+    `update_time`      datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
     INDEX `uk_generator` (`serial_number_id`, `record_date`)
 ) COMMENT = 'serial_number记录表';
 
@@ -535,8 +535,8 @@ CREATE TABLE `t_table_column`
     `user_type`       int      NOT NULL COMMENT '用户类型',
     `table_id`        int      NOT NULL COMMENT '表格id',
     `columns`         text     NULL COMMENT '具体的表格列，存入的json',
-    `create_time`     datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    `update_time`     datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    `create_time`     datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+    `update_time`     datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
     PRIMARY KEY (`table_column_id`),
     UNIQUE INDEX `uni_user_table` (`user_id`, `table_id`)
 ) COMMENT = '表格的自定义列存储';
@@ -550,7 +550,8 @@ CREATE TABLE `t_biz_visible_range`
     `biz_id`      bigint(20)   NOT NULL COMMENT '业务id',
     `data_type`   tinyint(4)   NOT NULL COMMENT '数据类型1员工 2部门',
     `data_id`     bigint(20)   NOT NULL COMMENT '员工or部门id',
-    `create_time` datetime     NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    `create_time` datetime     NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+    `update_time` datetime     NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
     UNIQUE KEY `uk_notice_data` (`biz_id`, `data_type`, `data_id`)
 ) COMMENT ='可见范围';
 
