@@ -125,7 +125,6 @@ CREATE TABLE `t_login_log`
     `login_result`    int           NOT NULL COMMENT '登录结果：0成功 1失败 2 退出',
     `remark`          varchar(2000)          DEFAULT NULL COMMENT '备注',
     `create_time`     datetime      NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
-    `update_time`     datetime      NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
     PRIMARY KEY (`login_log_id`),
     KEY `idx_user_id` (`user_id`),
     KEY `idx_login_time` (`create_time`)
@@ -184,7 +183,6 @@ CREATE TABLE `t_operate_log`
     `success_flag`      tinyint              DEFAULT NULL COMMENT '请求结果 0失败 1成功',
     `fail_reason`       longtext    NULL COMMENT '失败原因',
     `create_time`       datetime    NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
-    `update_time`       datetime    NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
     PRIMARY KEY (`operate_log_id`)
 ) COMMENT = '操作记录';
 
@@ -247,8 +245,7 @@ CREATE TABLE `t_role_menu`
     `menu_id`      bigint   NOT NULL COMMENT '菜单id',
     `create_time`  datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
     PRIMARY KEY (`role_menu_id`),
-    INDEX `idx_role_id` (`role_id`),
-    INDEX `idx_menu_id` (`menu_id`)
+    unique index `uk_role_menu` (`role_id`,`menu_id`)
 ) COMMENT = '角色-菜单';
 
 -- ----------------------------
