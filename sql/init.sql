@@ -90,29 +90,6 @@ CREATE TABLE `t_user`
 ) COMMENT = '用户表';
 
 -- ----------------------------
--- Table structure for t_file
--- ----------------------------
-DROP TABLE IF EXISTS `t_file`;
-CREATE TABLE `t_file`
-(
-    `file_id`           bigint       NOT NULL AUTO_INCREMENT COMMENT '主键ID',
-    `folder_type`       tinyint      NOT NULL COMMENT '文件夹类型',
-    `file_name`         varchar(100)          DEFAULT NULL COMMENT '文件名称',
-    `file_size`         int                   DEFAULT NULL COMMENT '文件大小',
-    `file_key`          varchar(200) NOT NULL COMMENT '文件key，用于文件下载',
-    `file_type`         varchar(50)  NOT NULL COMMENT '文件类型',
-    `creator_id`        bigint                DEFAULT NULL COMMENT '创建人，即上传人',
-    `creator_user_type` int                   DEFAULT NULL COMMENT '创建人用户类型',
-    `creator_name`      varchar(100)          DEFAULT NULL COMMENT '创建人姓名',
-    `create_time`       datetime     NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
-    `update_time`       datetime     NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
-    PRIMARY KEY (`file_id`),
-    UNIQUE INDEX `uk_file_key` (`file_key`),
-    INDEX `module_id_module_type` (`folder_type`),
-    INDEX `module_type` (`folder_type`)
-) COMMENT = '文件';
-
--- ----------------------------
 -- Table structure for t_login_fail
 -- ----------------------------
 DROP TABLE IF EXISTS `t_login_fail`;
