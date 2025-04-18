@@ -286,23 +286,6 @@ CREATE TABLE `t_serial_number_record`
 ) COMMENT = 'serial_number记录表';
 
 -- ----------------------------
--- Table structure for t_table_column
--- ----------------------------
-DROP TABLE IF EXISTS `t_table_column`;
-CREATE TABLE `t_table_column`
-(
-    `table_column_id` bigint   NOT NULL AUTO_INCREMENT,
-    `user_id`         bigint   NOT NULL COMMENT '用户id',
-    `user_type`       int      NOT NULL COMMENT '用户类型',
-    `table_id`        int      NOT NULL COMMENT '表格id',
-    `columns`         text     NULL COMMENT '具体的表格列，存入的json',
-    `create_time`     datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
-    `update_time`     datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
-    PRIMARY KEY (`table_column_id`),
-    UNIQUE INDEX `uni_user_table` (`user_id`, `table_id`)
-) COMMENT = '表格的自定义列存储';
-
--- ----------------------------
 -- Table structure for t_biz_visible_range
 -- ----------------------------
 CREATE TABLE `t_biz_visible_range`
