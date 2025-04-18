@@ -229,23 +229,6 @@ CREATE TABLE `t_operate_log`
 ) COMMENT = '操作记录';
 
 -- ----------------------------
--- Table structure for t_password_log
--- ----------------------------
-DROP TABLE IF EXISTS `t_password_log`;
-CREATE TABLE `t_password_log`
-(
-    `id`           bigint       NOT NULL AUTO_INCREMENT COMMENT '主键',
-    `user_id`      bigint       NOT NULL COMMENT '用户id',
-    `user_type`    tinyint      NOT NULL COMMENT '用户类型',
-    `old_password` varchar(255) NOT NULL COMMENT '旧密码',
-    `new_password` varchar(255)          DEFAULT NULL COMMENT '新密码',
-    `create_time`  datetime     NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
-    `update_time`  datetime     NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
-    PRIMARY KEY (`id`),
-    INDEX `user_and_type_index` (`user_id`, `user_type`)
-) COMMENT = '密码修改记录';
-
--- ----------------------------
 -- Table structure for t_position
 -- ----------------------------
 DROP TABLE IF EXISTS `t_position`;
