@@ -102,6 +102,18 @@
             </dependency>
 
             <dependency>
+                <groupId>io.github.lizhifuabc</groupId>
+                <artifactId>json-sdk-jackson</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>io.github.lizhifuabc</groupId>
+                <artifactId>json-spring-boot-starter</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <dependency>
                 <groupId>com.alibaba</groupId>
                 <artifactId>transmittable-thread-local</artifactId>
                 <version>${transmittable-thread-local.version}</version>

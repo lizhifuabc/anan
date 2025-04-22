@@ -5,20 +5,17 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>io.github.lizhifuabc</groupId>
-        <artifactId>anan</artifactId>
+        <artifactId>anan-core-json</artifactId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
 
-    <artifactId>anan-core</artifactId>
-    <packaging>pom</packaging>
-    <modules>
-        <module>anan-core-common</module>
-        <module>anan-core-cache</module>
-        <module>anan-core-db</module>
-        <module>anan-core-spring</module>
-        <module>anan-core-excel</module>
-        <module>anan-core-driver</module>
-        <module>anan-core-json</module>
-    </modules>
+    <artifactId>json-sdk-jackson</artifactId>
+    <dependencies>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+        </dependency>
+    </dependencies>
+
 
 </project>

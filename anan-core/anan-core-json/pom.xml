@@ -5,20 +5,17 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>io.github.lizhifuabc</groupId>
-        <artifactId>anan</artifactId>
+        <artifactId>anan-core</artifactId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
 
-    <artifactId>anan-core</artifactId>
+    <artifactId>anan-core-json</artifactId>
     <packaging>pom</packaging>
     <modules>
-        <module>anan-core-common</module>
-        <module>anan-core-cache</module>
-        <module>anan-core-db</module>
-        <module>anan-core-spring</module>
-        <module>anan-core-excel</module>
-        <module>anan-core-driver</module>
-        <module>anan-core-json</module>
+        <module>json-sdk-jackson</module>
+        <module>json-spring-boot-starter</module>
+        <module>json-example</module>
     </modules>
+
 
 </project>
