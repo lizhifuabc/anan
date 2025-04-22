@@ -1,5 +1,5 @@
 /**
- * 常亮
+ * 常量
  *
  * @author lizhifu
  * @since 2025/2/14

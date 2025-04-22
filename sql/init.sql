@@ -86,7 +86,7 @@ CREATE TABLE `t_user`
     `create_time`        datetime     NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
     `update_time`        datetime     NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
     PRIMARY KEY (`user_id`),
-    unique key  `uk_login_name` (`login_name`)
+    unique key `uk_login_name` (`login_name`)
 ) COMMENT = '用户表';
 
 -- ----------------------------
@@ -245,7 +245,7 @@ CREATE TABLE `t_role_menu`
     `menu_id`      bigint   NOT NULL COMMENT '菜单id',
     `create_time`  datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
     PRIMARY KEY (`role_menu_id`),
-    unique index `uk_role_menu` (`role_id`,`menu_id`)
+    unique index `uk_role_menu` (`role_id`, `menu_id`)
 ) COMMENT = '角色-菜单';
 
 -- ----------------------------
