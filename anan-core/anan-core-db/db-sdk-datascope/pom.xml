@@ -5,18 +5,11 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>io.github.lizhifuabc</groupId>
-        <artifactId>anan-core</artifactId>
+        <artifactId>anan-core-db</artifactId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
 
-    <artifactId>anan-core-db</artifactId>
-    <packaging>pom</packaging>
-    <modules>
-        <module>db-sdk-mybatis-x</module>
-        <module>db-sdk-dynamic-datasource</module>
-        <module>db-spring-boot-starter</module>
-        <module>db-sdk-mybatis</module>
-        <module>db-sdk-datascope</module>
-    </modules>
+    <artifactId>db-sdk-datascope</artifactId>
+
 
 </project>
